@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitStream - Project Management</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/meeting.css">
+    <link rel="stylesheet" href="css/project.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>BitStream</h1>
+                <p>Project Management System</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div id="loginError" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="screen hidden">
+        <nav class="navbar">
+            <div class="nav-brand">BitStream</div>
+            <div class="nav-user">
+                <span id="currentUser"></span>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-section="meetings">Meetings</a></li>
+                    <li><a href="#" class="nav-link" data-section="projects">Projects</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <!-- Dashboard Section -->
+                <div id="dashboardSection" class="content-section">
+                    <h2>Dashboard</h2>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <h3>Total Projects</h3>
+                            <div id="totalProjects" class="stat-number">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Active Projects</h3>
+                            <div id="activeProjects" class="stat-number">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Meeting Attendance</h3>
+                            <div id="attendanceRate" class="stat-number">100%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meeting-stats">
+                        <h3>Daily Meeting Late Join History</h3>
+                        <div id="lateJoinHistory" class="history-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Join Time</th>
+                                        <th>Late By</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lateJoinTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meetings Section -->
+                <div id="meetingsSection" class="content-section hidden">
+                    <h2>Meetings</h2>
+                    <div class="meeting-types">
+                        <div class="meeting-card">
+                            <h3>Daily Meeting</h3>
+                            <p>Time: 8:00 PM - 9:00 PM</p>
+                            <p>Join available from: 7:55 PM</p>
+                            <p id="dailyMeetingStatus" class="meeting-status">Not Available</p>
+                            <button id="joinDailyMeeting" class="join-btn" disabled>Join Meeting</button>
+                        </div>
+                        <div class="meeting-card">
+                            <h3>Weekly Meeting</h3>
+                            <p>Every Friday 7:00 PM</p>
+                            <button id="joinWeeklyMeeting" class="join-btn">Join Meeting</button>
+                        </div>
+                        <div class="meeting-card">
+                            <h3>Monthly Meeting</h3>
+                            <p>First Monday of each month 6:00 PM</p>
+                            <button id="joinMonthlyMeeting" class="join-btn">Join Meeting</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div id="projectsSection" class="content-section hidden">
+                    <h2>Projects</h2>
+                    <div class="project-header">
+                        <button id="createProjectBtn" class="create-btn">Create New Project</button>
+                    </div>
+                    <div id="projectsList" class="projects-list">
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Create Project Modal -->
+    <div id="createProjectModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create New Project</h2>
+            <form id="createProjectForm">
+                <div class="form-group">
+                    <label for="projectName">Project Name</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectDescription">Description</label>
+                    <textarea id="projectDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectMembers">Assign Members</label>
+                    <select id="projectMembers" multiple>
+                        <option value="Rafi">Rafi</option>
+                        <option value="Shakib">Shakib</option>
+                        <option value="Sabbir">Sabbir</option>
+                    </select>
+                </div>
+                <button type="submit" class="create-btn">Create Project</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="projectDetailsModal" class="modal hidden">
+        <div class="modal-content large">
+            <span class="close">&times;</span>
+            <div id="projectDetailsContent">
+                <!-- Project details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/meeting.js"></script>
+    <script src="js/project.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

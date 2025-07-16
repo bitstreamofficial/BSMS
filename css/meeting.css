@@ -1,0 +1,53 @@
+/* Meeting section styles */
+.meeting-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.meeting-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.meeting-card:hover {
+    transform: translateY(-5px);
+}
+
+.meeting-card h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.meeting-status {
+    font-weight: 600;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f8f9fa;
+}
+
+.join-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.join-btn:hover:not(:disabled) {
+    background: #219a52;
+}
+
+.join-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
